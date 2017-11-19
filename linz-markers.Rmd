@@ -7,7 +7,7 @@ output: html_document
 ---
 
 ### Notes
-* Source data from : http://https://www.linz.govt.nz/data/geodetic-services/download-geodetic-mark-data
+* Source data from : https://www.linz.govt.nz/data/geodetic-services/download-geodetic-mark-data
 * Wellington land distric marks show with order 0, 1 or 2.
 * The marker popup label is the Name : Height (Ellipsoidal Height in meters)
 
@@ -24,7 +24,7 @@ library(tidyverse)
 ```
 
 ```{r}
-wn_markers <- read_csv("~/Downloads/gdb_WN/gdb_WN.csv")
+wn_markers <- read_csv("~/data/linz/gdb_WN/gdb_WN.csv")
 
 df <- wn_markers %>%
       filter(NZGD2000Order < 3) %>%
@@ -41,3 +41,4 @@ df %>% leaflet() %>%
         addTiles() %>%
         addMarkers(popup = df$popup, clusterOptions = markerClusterOptions())
 ```
+
