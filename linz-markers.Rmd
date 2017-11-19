@@ -8,7 +8,7 @@ output: html_document
 
 ### Notes
 * Source data from : https://www.linz.govt.nz/data/geodetic-services/download-geodetic-mark-data
-* Wellington land distric marks show with order 0, 1 or 2.
+* Wellington land district marks shown - with order 0, 1 or 2.
 * The marker popup label is the Name : Height (Ellipsoidal Height in meters)
 
 ```{r setup, include=FALSE}
