@@ -1,5 +1,5 @@
 ---
-title: "Devloping Data Products - Leaflet"
+title: "Developing Data Products with Leaflet"
 subtitle: "Selected geodetic marks from Land Information New Zealand Landonline"
 author: "Greig Robertson"
 date: "11/19/2017"
