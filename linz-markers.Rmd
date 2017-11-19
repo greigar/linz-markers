@@ -1,0 +1,43 @@
+---
+title: "Devloping Data Products - Leaflet"
+subtitle: "Selected geodetic marks from Land Information New Zealand Landonline"
+author: "Greig Robertson"
+date: "11/19/2017"
+output: html_document
+---
+
+### Notes
+* Source data from : http://https://www.linz.govt.nz/data/geodetic-services/download-geodetic-mark-data
+* Wellington land distric marks show with order 0, 1 or 2.
+* The marker popup label is the Name : Height (Ellipsoidal Height in meters)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+# use devtools version
+# devtools::install_github("rstudio/leaflet")
+library(leaflet)
+library(tidyverse)
+```
+
+```{r}
+wn_markers <- read_csv("~/Downloads/gdb_WN/gdb_WN.csv")
+
+df <- wn_markers %>%
+      filter(NZGD2000Order < 3) %>%
+      arrange(Name) %>%
+      mutate(name_height = ifelse(is.na(NZGD2000EHgt),
+                                  Name,
+                                  paste(Name, ':', round(NZGD2000EHgt)) )) %>%
+      select(lng   = NZGD2000Lon,
+             lat   = NZGD2000Lat,
+             popup = name_height) %>%
+      as.data.frame
+
+df %>% leaflet() %>%
+        addTiles() %>%
+        addMarkers(popup = df$popup, clusterOptions = markerClusterOptions())
+```
